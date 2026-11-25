@@ -7,7 +7,6 @@ from puzzle.result import SearchResult
 class AStar(BaseSearch):
 
     def heuristic(self, state: State) -> int:
-        # Distância de Manhattan, sem contar o espaço vazio (admissível)
         total = 0
         for index, tile in enumerate(state.tiles):
             if tile != 0:
@@ -17,7 +16,6 @@ class AStar(BaseSearch):
         return total
 
     def search(self, initial: State) -> SearchResult:
-        # (f, ordem de inserção, estado): a ordem desempata valores iguais de f
         frontier = [(initial.cost + self.heuristic(initial), 0, initial)]
         best_cost = {initial: initial.cost}
         result = SearchResult(solution=None, nodes_generated=1, max_frontier_size=1)
@@ -25,7 +23,7 @@ class AStar(BaseSearch):
         while frontier:
             _, _, state = heapq.heappop(frontier)
             if state.cost > best_cost[state]:
-                continue  # já alcançado por um caminho mais barato
+                continue
             if state.is_goal:
                 result.solution = state
                 result.depth = state.cost - initial.cost

@@ -28,7 +28,6 @@ class State:
         """Retorna os estados filhos válidos a partir deste estado."""
         blank = self.blank_index
         row, col = divmod(blank, 3)
-        # Cada ação indica a direção em que o espaço vazio se move
         moves = (("UP", -1, 0), ("DOWN", 1, 0), ("LEFT", 0, -1), ("RIGHT", 0, 1))
 
         children = []

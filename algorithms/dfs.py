@@ -12,8 +12,6 @@ class DFS(BaseSearch):
 
     def search(self, initial: State) -> SearchResult:
         frontier = [initial]
-        # Menor profundidade em que cada estado foi gerado: permite revisitá-lo por
-        # um caminho mais curto, para que o limite não descarte soluções válidas
         best_depth = {initial: 0}
         result = SearchResult(solution=None, nodes_generated=1, max_frontier_size=1)
 
@@ -21,7 +19,7 @@ class DFS(BaseSearch):
             state = frontier.pop()
             depth = state.cost - initial.cost
             if depth > best_depth[state]:
-                continue  # já alcançado por um caminho mais curto
+                continue
             if state.is_goal:
                 result.solution = state
                 result.depth = depth
